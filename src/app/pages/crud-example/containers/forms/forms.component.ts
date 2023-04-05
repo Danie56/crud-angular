@@ -32,7 +32,6 @@ export class FormsComponent implements OnDestroy {
     private _router: Router,
     private _route: ActivatedRoute
   ) {
-    console.log(this._route);
     const {
       snapshot: {
         params: { id },

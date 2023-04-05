@@ -1,0 +1,29 @@
+<section class="container">
+  <section class="container__header">
+    <h2>Crud de usuarios</h2>
+    <section class="container__header__buttons">
+      <button mat-raised-button color="primary" (click)="back()">Volver</button>
+      <button mat-raised-button color="primary" (click)="onSubmit()">
+        Guardar
+      </button>
+    </section>
+  </section>
+  <section class="container__form">
+    <form [formGroup]="form">
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="name" required />
+        <mat-error *ngIf="nameField?.touched && nameField?.errors?.['required']"
+          >Es requerido</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Edad</mat-label>
+        <input matInput formControlName="age" required />
+        <mat-error *ngIf="ageField?.touched && ageField?.errors?.['required']"
+          >Es requerido</mat-error
+        >
+      </mat-form-field>
+    </form>
+  </section>
+</section>

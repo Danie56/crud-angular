@@ -1,0 +1,11 @@
+<section class="container">
+  <h1 mat-dialog-title>Esta seguro que desea {{ data }}</h1>
+  <section mat-dialog-content class="container__buttons">
+    <button mat-raised-button color="primary" (click)="close(false)">
+      Volver
+    </button>
+    <button mat-raised-button color="primary" (click)="close(true)">
+      Continuar
+    </button>
+  </section>
+</section>

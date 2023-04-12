@@ -1,6 +1,6 @@
 export const environment = {
-  url: 'https://crudcrud.com/api/bf8a6d81d75843b6a0fc3c305814eb2a/',
+  url: 'https://crudcrud.com/api/c9e64e315058456c8b728ead79a28ae8/',
   patch: {
-    user: 'user/',
+    user: 'users/',
   },
 };

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -13,9 +13,12 @@ import { IUser } from 'src/app/shared/model/user';
 })
 export class ListComponent implements OnInit, OnDestroy {
   private _subscriptions: Subscription[] = [];
+  public criterial: string = '';
 
   displayedColumns: string[] = ['id', 'name', 'age', 'operation'];
   dataSource: IUser[] = [];
+  users: IUser[] = [];
+
 
   constructor(
     private _crudExampleService: CrudExampleService,
@@ -25,13 +28,16 @@ export class ListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this._getAll();
+  
   }
 
   private _getAll(): void {
     const sub = this._crudExampleService.getAll().subscribe((item) => {
       this.dataSource = item;
+      this.users = item;
     });
     this._subscriptions.push(sub);
+    console.log(sub)
   }
 
   delete(id: number): void {
@@ -54,8 +60,25 @@ export class ListComponent implements OnInit, OnDestroy {
 
   goForm(id?: number): void {
     const path = !!id ? `forms/${id}` : 'forms';
+    console.log(path+"xd")
     this._router.navigate([path]);
   }
+  test(): void{
+    //const path = `forms/${this.criterial}`
+    
+    this.dataSource=this.users.filter(user => user.name === this.criterial)
+
+    //this._router.navigate([path])
+
+  }
+  listUsers(): void{
+    this.dataSource  = this.users;
+    this.criterial = '';
+
+
+
+  }
+
 
   ngOnDestroy(): void {
     this._subscriptions.forEach((sub) => sub && sub.unsubscribe());

@@ -2,6 +2,11 @@
   <section class="container__header">
     <h2>Crud de usuarios</h2>
     <button mat-raised-button color="primary" (click)="goForm()">Crear</button>
+    <button mat-raised-button color="primary"(click)="test()">buscar</button>
+    <input type="text" [(ngModel)]="criterial" />
+    <button mat-raised-button color="primary" (click)="listUsers()">listar</button>
+
+
   </section>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <!--- Note that these columns can be defined in any order.

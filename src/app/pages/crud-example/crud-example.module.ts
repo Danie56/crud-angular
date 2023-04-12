@@ -7,7 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -34,6 +34,7 @@ const routes: Routes = [
     MatInputModule,
     MatTableModule,
     MatIconModule,
+    FormsModule
   ],
 })
 export class CrudExampleModule {}

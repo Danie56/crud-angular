@@ -3,4 +3,15 @@ export const environment = {
   patch: {
     user: 'user/',
   },
+  Endpoints:{
+    getAll: 'getAll',
+    save: 'save',
+    delete: 'delete/',
+    get: 'get/',
+    update: 'update',
+
+
+  }
+
+
 };

@@ -68,7 +68,6 @@ export class ListComponent implements OnInit, OnDestroy {
     
     this.dataSource=this.users.filter(user => user.name === this.criterial)
 
-    //this._router.navigate([path])
 
   }
   listUsers(): void{

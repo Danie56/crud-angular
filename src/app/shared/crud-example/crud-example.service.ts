@@ -14,33 +14,25 @@ export class CrudExampleService {
   constructor(private _http: HttpClient, private _snackBar: MatSnackBar) {}
 
   getAll(): Observable<IUser[]> {
-    return this._http.get<IUser[]>(this._url).pipe(
-      map((item: any) => {
-        return item.map((element: any) => {
-          return { ...element, id: element?._id };
-        });
-      })
-    );
+    return this._http.get<IUser[]>(this._url+environment.Endpoints.getAll);
   }
 
   getById(id: number): Observable<IUser> {
-    return this._http.get<IUser>(this._url + id).pipe(
-      map((item: any) => {
-        return { ...item, id: item?._id };
-      })
+    return this._http.get<IUser>(this._url + environment.Endpoints.get+ id).pipe(
+      
     );
   }
 
   create(body: IUser): Observable<IUser> {
-    return this._http.post<IUser>(this._url, body);
+    return this._http.post<IUser>(this._url+environment.Endpoints.save, body);
   }
 
   update(body: IUser): Observable<IUser> {
-    return this._http.put<IUser>(this._url + body?.id, body);
+    return this._http.put<IUser>(this._url + environment.Endpoints.update, body);
   }
 
   delete(id: number): Observable<IUser> {
-    return this._http.delete<IUser>(this._url + id);
+    return this._http.delete<IUser>(this._url+ environment.Endpoints.delete + id);
   }
 
   openSnackBar(message: string): void {

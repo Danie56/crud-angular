@@ -10,7 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CrudExampleService } from 'src/app/shared/crud-example/crud-example.service';
 import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
-import { IUser } from 'src/app/shared/model/user';
+import { Patient } from 'src/app/shared/model/Patient';
 
 @Component({
   selector: 'app-forms',
@@ -21,9 +21,14 @@ export class FormsComponent implements OnDestroy {
   private _subscriptions: Subscription[] = [];
 
   form: FormGroup = new FormGroup({
-    id: new FormControl(null),
     name: new FormControl(null, Validators.required),
-    age: new FormControl(null, Validators.required),
+    lastName:new FormControl(null, Validators.required),
+    sex:new FormControl(null, Validators.required),
+    addres:new FormControl(null, Validators.required),
+    mail:new FormControl(null, Validators.required),
+    cell:new FormControl(null, Validators.required),
+    age:new FormControl(null, Validators.required),
+    scheduleAppointment: new FormControl(null, Validators.required)
   });
 
   constructor(
@@ -39,7 +44,6 @@ export class FormsComponent implements OnDestroy {
     } = this._route;
 
     if (!!id) {
-      this._getById(id);
     }
   }
 
@@ -51,14 +55,10 @@ export class FormsComponent implements OnDestroy {
     return this.form.get('age');
   }
 
-  private _getById(id: number): void {
-    const sub = this._crudExampleService.getById(id).subscribe((item) => {
-      this.form.patchValue(item);
-    });
-    this._subscriptions.push(sub);
-  }
 
   onSubmit(): void {
+    console.log("submit")
+    console.log(this.form.invalid)
     if (this.form.invalid) return;
     const value = this.form.value;
     if (!!value?.id) {
@@ -68,26 +68,18 @@ export class FormsComponent implements OnDestroy {
     this._openDialog(true, false, value);
   }
 
-  private _create(body: IUser): void {
+  private _create(body: Patient): void {
     const sub = this._crudExampleService.create(body).subscribe((item) => {
       this._crudExampleService.openSnackBar('Registro creado con exito');
-      this._goList();
     });
     this._subscriptions.push(sub);
   }
 
-  private _update(body: IUser): void {
-    const sub = this._crudExampleService.update(body).subscribe((item) => {
-      this._crudExampleService.openSnackBar('Registro se actualizo con exito');
-      this._goList();
-    });
-    this._subscriptions.push(sub);
-  }
 
   private _openDialog(
     create: boolean,
     back: boolean,
-    body: IUser = {} as IUser
+    body: Patient = {} as Patient
   ): void {
     const sub = this._dialog
       .open(DialogComponent, {
@@ -104,7 +96,6 @@ export class FormsComponent implements OnDestroy {
           this._create(body);
           return;
         }
-        this._update(body);
       });
     this._subscriptions.push(sub);
   }

@@ -1,57 +1,73 @@
-<section class="container">
-  <section class="container__header">
-    <h2>Crud de usuarios</h2>
-    <button mat-raised-button color="primary" (click)="goForm()">Crear</button>
-    <button mat-raised-button color="primary"(click)="test()">buscar</button>
-    <input type="text" [(ngModel)]="criterial" />
-    <button mat-raised-button color="primary" (click)="listUsers()">listar</button>
 
+  <table mat-table [dataSource]="dataSource">
 
-  </section>
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-    <!--- Note that these columns can be defined in any order.
-            The actual rendered columns are set as a property on the row definition" -->
-
-    <!-- Id Column -->
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef>Id</th>
-      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+    <!-- Columna de ID -->
+    <ng-container matColumnDef="idAppointment">
+      <th mat-header-cell *matHeaderCellDef> ID </th>
+      <td mat-cell *matCellDef="let element"> {{element.idAppointment}} </td>
     </ng-container>
-
-    <!-- Name Column -->
+  
+    <!-- Columna de nombre -->
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef>Nombre</th>
-      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
     </ng-container>
-
-    <!-- Age Column -->
+  
+    <!-- Columna de apellido -->
+    <ng-container matColumnDef="lastName">
+      <th mat-header-cell *matHeaderCellDef> Last Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+    </ng-container>
+  
+    <!-- Columna de sexo -->
+    <ng-container matColumnDef="sex">
+      <th mat-header-cell *matHeaderCellDef> Sex </th>
+      <td mat-cell *matCellDef="let element"> {{element.sex}} </td>
+    </ng-container>
+  
+    <!-- Columna de dirección -->
+    <ng-container matColumnDef="address">
+      <th mat-header-cell *matHeaderCellDef> Address </th>
+      <td mat-cell *matCellDef="let element"> {{element.addres}} </td>
+    </ng-container>
+  
+    <!-- Columna de correo electrónico -->
+    <ng-container matColumnDef="mail">
+      <th mat-header-cell *matHeaderCellDef> Email </th>
+      <td mat-cell *matCellDef="let element"> {{element.mail}} </td>
+    </ng-container>
+  
+    <!-- Columna de teléfono celular -->
+    <ng-container matColumnDef="cell">
+      <th mat-header-cell *matHeaderCellDef> Cell Phone </th>
+      <td mat-cell *matCellDef="let element"> {{element.cell}} </td>
+    </ng-container>
+  
+    <!-- Columna de edad -->
     <ng-container matColumnDef="age">
-      <th mat-header-cell *matHeaderCellDef>Edad</th>
-      <td mat-cell *matCellDef="let element">{{ element.age }}</td>
+      <th mat-header-cell *matHeaderCellDef> Age </th>
+      <td mat-cell *matCellDef="let element"> {{element.age}} </td>
     </ng-container>
-
-    <!-- Operation Column -->
-    <ng-container matColumnDef="operation">
-      <th mat-header-cell *matHeaderCellDef>Acción</th>
+  
+    <!-- Columna de programación de citas -->
+    <ng-container matColumnDef="scheduleAppointment">
+      <th mat-header-cell *matHeaderCellDef> Schedule Appointment </th>
+      <td mat-cell *matCellDef="let element"> {{element.scheduleAppointment}} </td>
+    </ng-container>
+  
+    <!-- Columna de aprobado -->
+    <ng-container matColumnDef="approved">
+      <th mat-header-cell *matHeaderCellDef> Approved </th>
       <td mat-cell *matCellDef="let element">
-        <button
-          mat-icon-button
-          aria-label="Editar registro"
-          (click)="goForm(element.id)"
-        >
-          <mat-icon>edit</mat-icon>
-        </button>
-        <button
-          mat-icon-button
-          aria-label="Borrar registro"
-          (click)="delete(element.id)"
-        >
-          <mat-icon>delete</mat-icon>
+        <button mat-icon-button color="primary" (click)="approvePatient(element.idAppointment)">
+          <mat-icon>{{ element.approved ? 'check_circle' : 'cancel' }}</mat-icon>
         </button>
       </td>
     </ng-container>
-
+      
+    <!-- Encabezados de columna -->
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  
+    <!-- Filas de datos -->
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-</section>

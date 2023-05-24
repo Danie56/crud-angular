@@ -4,8 +4,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CrudExampleService } from 'src/app/shared/crud-example/crud-example.service';
 import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
-import { IUser } from 'src/app/shared/model/user';
-
+import { Patient } from 'src/app/shared/model/Patient';
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -15,9 +14,9 @@ export class ListComponent implements OnInit, OnDestroy {
   private _subscriptions: Subscription[] = [];
   public criterial: string = '';
 
-  displayedColumns: string[] = ['id', 'name', 'age', 'operation'];
-  dataSource: IUser[] = [];
-  users: IUser[] = [];
+  displayedColumns: string[] = ['idAppointment', 'name', 'lastName', 'sex', 'address', 'mail', 'cell', 'age', 'scheduleAppointment', 'approved'];
+  dataSource: Patient[] = [];
+  users: Patient[] = [];
 
 
   constructor(
@@ -40,23 +39,6 @@ export class ListComponent implements OnInit, OnDestroy {
     console.log(sub)
   }
 
-  delete(id: number): void {
-    this._dialog
-      .open(DialogComponent, {
-        data: 'Eliminar',
-      })
-      .afterClosed()
-      .subscribe((value) => {
-        if (value) {
-          const sub = this._crudExampleService.delete(id).subscribe((item) => {
-            this._crudExampleService.openSnackBar(
-              'Registro se elimino con exito'
-            );
-            this._getAll();
-          });
-        }
-      });
-  }
 
   goForm(id?: number): void {
     const path = !!id ? `forms/${id}` : 'forms';
@@ -77,6 +59,29 @@ export class ListComponent implements OnInit, OnDestroy {
 
 
   }
+  approvePatient(patientId: string): void {
+    const patient = this.dataSource.find(p => p.idAppointment === patientId);
+    if (patient) {
+      this._crudExampleService.approvedAppointment(patientId,patient).subscribe(
+        () => {
+          // La solicitud fue exitosa, realiza cualquier acción adicional necesaria
+          // ...
+  
+          // Actualiza el estado de aprobación del paciente
+          patient.approved = true;
+        },
+        error => {
+          // Ocurrió un error al realizar la solicitud HTTP, maneja el error apropiadamente
+          console.error('Error al realizar la solicitud HTTP:', error);
+        }
+      );
+          console.log(patientId);
+
+
+          patient.approved = true;
+        }
+  }
+
 
 
   ngOnDestroy(): void {

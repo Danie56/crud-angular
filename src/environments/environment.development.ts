@@ -1,18 +1,16 @@
 export const environment = {
   url: 'http://localhost:8080/',
-
   patch: {
-    user: 'people/',
-
+    user: '',
   },
-
   Endpoints:{
-    getAll: 'getAll',
-    save: 'save',
-    delete: 'delete/',
-    get: 'get/',
-    update: 'update',
+    getAll: 'get_appointments',
+    save: 'save_appointment',
+    delete: 'approved_appointment/',
+
 
   }
+
+
 
 };

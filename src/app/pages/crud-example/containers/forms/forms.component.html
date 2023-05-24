@@ -1,8 +1,7 @@
 <section class="container">
   <section class="container__header">
-    <h2>Crud de usuarios</h2>
+    <h2>agendar cita</h2>
     <section class="container__header__buttons">
-      <button mat-raised-button color="primary" (click)="back()">Volver</button>
       <button mat-raised-button color="primary" (click)="onSubmit()">
         Guardar
       </button>
@@ -10,20 +9,76 @@
   </section>
   <section class="container__form">
     <form [formGroup]="form">
+
       <mat-form-field appearance="outline">
         <mat-label>Nombre</mat-label>
         <input matInput formControlName="name" required />
         <mat-error *ngIf="nameField?.touched && nameField?.errors?.['required']"
           >Es requerido</mat-error
         >
+
       </mat-form-field>
       <mat-form-field appearance="outline">
+        <mat-label>Apellido</mat-label>
+        <input matInput formControlName="lastName" required />
+        <mat-error *ngIf="nameField?.touched && nameField?.errors?.['required']"
+          >Es requerido</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>sexo</mat-label>
+        <input matInput formControlName="sex" required />
+        <mat-error *ngIf="nameField?.touched && nameField?.errors?.['required']"
+          >Es requerido</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Direccion</mat-label>
+        <input matInput formControlName="addres" required />
+        <mat-error *ngIf="nameField?.touched && nameField?.errors?.['required']"
+          >Es requerido</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Mail</mat-label>
+        <input matInput formControlName="mail" required />
+        <mat-error *ngIf="nameField?.touched && nameField?.errors?.['required']"
+          >Es requerido</mat-error
+        >
+
+
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>cell</mat-label>
+        <input matInput formControlName="cell" required />
+        <mat-error *ngIf="nameField?.touched && nameField?.errors?.['required']"
+          >Es requerido</mat-error
+        >
+      </mat-form-field>
+
+
+
+
+      
+      <mat-form-field appearance="outline">
         <mat-label>Edad</mat-label>
-        <input matInput formControlName="age" required />
+        <input matInput formControlName="age" type="number" required />
         <mat-error *ngIf="ageField?.touched && ageField?.errors?.['required']"
           >Es requerido</mat-error
         >
       </mat-form-field>
+      <mat-form-field>
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="scheduleAppointment" type="text">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+          
+
     </form>
   </section>
 </section>

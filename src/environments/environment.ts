@@ -1,17 +1,16 @@
 export const environment = {
-  url: 'https://crudcrud.com/api/8f184ec0fb294c8a805cf5814e72b226/',
+  url: 'http://localhost:8080/',
   patch: {
-    user: 'user/',
+    user: '/',
   },
   Endpoints:{
-    getAll: 'getAll',
-    save: 'save',
-    delete: 'delete/',
-    get: 'get/',
-    update: 'update',
+    getAll: 'get_appointments',
+    save: 'save_appointment',
+    delete: 'approved_appointment/',
 
 
   }
+
 
 
 };

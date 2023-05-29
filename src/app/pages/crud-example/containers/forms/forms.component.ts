@@ -11,13 +11,20 @@ import { Subscription } from 'rxjs';
 import { CrudExampleService } from 'src/app/shared/crud-example/crud-example.service';
 import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
 import { Patient } from 'src/app/shared/model/Patient';
+import { HttpClientModule, HttpClient, HttpParams } from '@angular/common/http';
+
+
 
 @Component({
   selector: 'app-forms',
   templateUrl: './forms.component.html',
   styleUrls: ['./forms.component.scss'],
+
 })
 export class FormsComponent implements OnDestroy {
+  files: File[] = [];
+  idCar: string = 'SFF567';
+
   private _subscriptions: Subscription[] = [];
 
   form: FormGroup = new FormGroup({
@@ -32,10 +39,12 @@ export class FormsComponent implements OnDestroy {
   });
 
   constructor(
+    private _http: HttpClient,
     private _crudExampleService: CrudExampleService,
     private _dialog: MatDialog,
     private _router: Router,
     private _route: ActivatedRoute
+
   ) {
     const {
       snapshot: {
@@ -111,4 +120,38 @@ export class FormsComponent implements OnDestroy {
   ngOnDestroy(): void {
     this._subscriptions.forEach((sub) => sub && sub.unsubscribe());
   }
+  upload(): void {
+    console.log('ok')
+    const url = 'http://localhost:8080/loard_documents';
+  
+    const formData: FormData = new FormData();
+    formData.append('idCar', this.idCar);
+  
+    for (let file of this.files) {
+      formData.append('files', file);
+    }
+  
+    this._http.post(url, formData)
+      .subscribe(
+        response => {
+          console.log('Upload successful:', response);
+          // Process the response as needed
+        },
+        error => {
+          console.error('Error uploading documents:', error);
+          // Handle the error
+        }
+      );
+
+  
+  }
+
+  onFileSelected(event: any): void {
+    this.files = event.target.files;
+    console.log(this.files.length); // Aquí puedes ver los archivos seleccionados
+  }
+      
+  
+
+
 }
